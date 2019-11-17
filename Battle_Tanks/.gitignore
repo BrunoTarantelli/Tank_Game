@@ -75,3 +75,8 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+
+# Conteudos e plug-ing opcionais
+Content/UrbanMaterialPack/*
+Content/Environment_Set/*
+Content/StarterContent/*

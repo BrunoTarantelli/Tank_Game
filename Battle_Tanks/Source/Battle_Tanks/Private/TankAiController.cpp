@@ -6,6 +6,7 @@
 void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
+	PrimaryActorTick.bCanEverTick = true;
 
 	auto PlayerTank = GetPlayerTank();
 
@@ -18,6 +19,16 @@ void ATankAiController::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("TankAIController achou o: %s"), *(PlayerTank->GetName()));
 	}
 }
+
+void  ATankAiController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank())
+	{
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
+
 
 ATank* ATankAiController::GetControlledTank() const
 {

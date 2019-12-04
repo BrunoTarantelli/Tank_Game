@@ -23,4 +23,20 @@ private:
 	virtual void Tick(float DeataTima) override;
 
 	void AimTowardsCrosshair();
+
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.33333;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceEnd = 1000000;
 };

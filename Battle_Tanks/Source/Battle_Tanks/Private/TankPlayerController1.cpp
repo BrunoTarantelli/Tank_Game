@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Battle_Tanks.h"
+#include "Tank.h"
 #include "Engine/World.h"
 #include "TankPlayerController1.h"
 #include "..\Public\TankPlayerController1.h"
@@ -11,14 +12,6 @@ void ATankPlayerController1::BeginPlay()
 	
 	auto ControlledTank = GetControlledTank();
 
-	if(!ControlledTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController não possui um tank"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController possui o tank: %s"), *(ControlledTank->GetName()));
-	}
 }
 
 void ATankPlayerController1::Tick(float DeltaTime)
@@ -54,7 +47,7 @@ bool ATankPlayerController1::GetSightRayHitLocation(FVector& HitLocation) const
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		GetLookVectorHitLocation(LookDirection, HitLocation);
+		return GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
 	return true;
 }

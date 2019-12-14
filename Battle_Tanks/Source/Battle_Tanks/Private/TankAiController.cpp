@@ -8,30 +8,19 @@ void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
 	PrimaryActorTick.bCanEverTick = true;
-
-	auto PlayerTank = GetPlayerTank();
-
 }
 
 void  ATankAiController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (GetPlayerTank())
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
+
+	if (PlayerTank)
 	{
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		ControlledTank->AimAt(PlayerTank->GetActorLocation());
+
+		//atira a CADA frame
+		ControlledTank->Fire();
 	}
-}
-
-
-ATank* ATankAiController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-ATank* ATankAiController::GetPlayerTank() const
-{
-	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!PlayerPawn) { return nullptr;}
-
-	return Cast<ATank>(PlayerPawn);
 }

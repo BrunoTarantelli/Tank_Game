@@ -9,6 +9,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingCompenent;
+class AProjectile;
 
 UCLASS()
 class BATTLE_TANKS_API ATank : public APawn
@@ -41,7 +42,17 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000;
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint; //TSubclassOf
+
+	//Referencial local de Barrel para spawn de projetil
+	UTankBarrel* Barrel = nullptr;
+
+	double LastFireTime = 0;
 };

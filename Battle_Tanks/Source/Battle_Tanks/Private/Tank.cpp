@@ -53,6 +53,8 @@ void ATank::Fire()
 	//proteção de ponteiro
 	if (Barrel && IsReloaded)
 	{
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f; Atirou"), Time);
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
 			Barrel->GetSocketLocation(FName("Projectile")),

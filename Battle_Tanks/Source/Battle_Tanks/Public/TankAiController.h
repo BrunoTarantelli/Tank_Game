@@ -18,4 +18,6 @@ private:
 
 	virtual void Tick(float DeltaTime) override;
 
+	//Quao perto do jogador a IA chega
+	float AccptanceRadius = 3000;
 };

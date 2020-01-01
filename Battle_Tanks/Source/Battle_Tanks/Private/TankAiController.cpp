@@ -18,9 +18,10 @@ void  ATankAiController::Tick(float DeltaTime)
 
 	if (PlayerTank)
 	{
+		MoveToActor(PlayerTank, AccptanceRadius);
+
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
-		//atira a CADA frame
 		ControlledTank->Fire();
 	}
 }

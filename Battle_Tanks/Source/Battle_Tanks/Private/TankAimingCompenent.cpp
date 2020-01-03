@@ -15,16 +15,11 @@ UTankAimingCompenent::UTankAimingCompenent()
 	// ...
 }
 
-void UTankAimingCompenent::SetBarrelReference(UTankBarrel* BarrelToSet)
+void UTankAimingCompenent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
 	Barrel = BarrelToSet;
-}
-
-void UTankAimingCompenent::SetTurretReference(UTankTurret* TurretToSet)
-{
 	Turret = TurretToSet;
 }
-
 
 // Called when the game starts
 void UTankAimingCompenent::BeginPlay()
@@ -71,6 +66,8 @@ void UTankAimingCompenent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingCompenent::MoveBarrelTowards(FVector AimDirection) //alinhar cano com reticula de mira
 {
+	if (!Barrel || !Turret) { return; }
+
 	auto BarrelRotator= Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;

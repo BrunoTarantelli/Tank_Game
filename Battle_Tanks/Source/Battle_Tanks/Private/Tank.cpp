@@ -1,8 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Battle_Tanks.h"
-#include "TankAimingCompenent.h"
-#include "TankMovementComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "Tank.h"
@@ -13,9 +11,6 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s QUACK: TankC++ Construct"), *TankName);
 }
 
 // Called when the game starts or when spawned
@@ -23,21 +18,14 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();	//Necessario para BeginPlay em Blueprint
 
-	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s QUACK: TankC++ BeginPlay"), *TankName);
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!TankAimingCompenent) { return; }
-	TankAimingCompenent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) { return; }
 	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	//proteção de ponteiro
-	if (Barrel && IsReloaded)
+	if (IsReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,

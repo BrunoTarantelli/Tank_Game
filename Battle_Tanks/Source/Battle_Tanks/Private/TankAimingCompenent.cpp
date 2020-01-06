@@ -38,9 +38,9 @@ void UTankAimingCompenent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingCompenent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingCompenent::AimAt(FVector HitLocation)
 {
-	if (!Barrel) { return; }//protrecao
+	if (!ensure(Barrel)) { return; }//protrecao
 	
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -66,7 +66,7 @@ void UTankAimingCompenent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingCompenent::MoveBarrelTowards(FVector AimDirection) //alinhar cano com reticula de mira
 {
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel) || !ensure(Turret)) { return; }
 
 	auto BarrelRotator= Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();

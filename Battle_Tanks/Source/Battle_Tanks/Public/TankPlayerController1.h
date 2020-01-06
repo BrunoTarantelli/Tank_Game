@@ -4,11 +4,9 @@
 
 
 #include "CoreMinimal.h"
-#include "TankAimingCompenent.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController1.generated.h"
 
-class ATank;
 class UTankAimingCompenent;
 
 UCLASS()
@@ -17,9 +15,6 @@ class BATTLE_TANKS_API ATankPlayerController1 : public APlayerController
 	GENERATED_BODY()
 
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingCompenent* AimCompRef);
 

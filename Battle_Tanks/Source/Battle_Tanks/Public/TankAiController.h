@@ -10,12 +10,15 @@ UCLASS()
 class BATTLE_TANKS_API ATankAiController : public AAIController
 {
 	GENERATED_BODY()
-	
+
+protected:
+
+	//Quao perto do jogador a IA chega
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AccptanceRadius = 8000;
+
 private:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-
-	//Quao perto do jogador a IA chega
-	float AccptanceRadius = 3000;
 };
